@@ -1214,6 +1214,7 @@ contract CoreNFTs is ERC721, ERC721URIStorage, Ownable {
     uint256 public Maxsupply;
     uint256 public Supply;
     uint256 public Cost = 3 ether;
+    uint256 private IDs;
     bool public isMintEnabled;
 
     mapping(address => uint256) public GetMintID;
@@ -1243,7 +1244,9 @@ contract CoreNFTs is ERC721, ERC721URIStorage, Ownable {
         Cost = newCost;
     }
 
-    function SetURI(uint256 tokenId, string memory uri) public onlyOwner {
+    function SetURI(string memory uri) public onlyOwner {
+        uint256 tokenId = IDs;
+        IDs++;
         tokenipfs[tokenId] = uri;
         UriSet[msg.sender]++;
     }
